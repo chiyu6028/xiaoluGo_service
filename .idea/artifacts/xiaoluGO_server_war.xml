@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="xiaoluGO_server:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="xiaoluGO.war">
+      <element id="artifact" artifact-name="xiaoluGO_server:war exploded" />
+    </root>
+  </artifact>
+</component>

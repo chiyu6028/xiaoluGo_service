@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--手动路径配置-->
+    <!--<mappers>
+        <mapper resource="../conf/mybatis/points/mapper-frame.xml" />
+        <mapper resource="../conf/mybatis/points/mapper-system.xml" />
+    </mappers>-->
+
+    <!--mybatis拦截配置"></plugin-->
+    <!--<plugins>
+        <plugin interceptor="com.szkingdom.crm.util.pagination.PageInterceptor"></plugin>
+        <plugin interceptor="com.szkingdom.crm.report.plugin.ReportInterceptor"></plugin>
+    </plugins>-->
+
+</configuration>
