@@ -1,6 +1,6 @@
-com\xiaolu\service\impl\UserServiceImpl.class
 com\xiaolu\dao\UserMapper.class
-com\xiaolu\service\UserService.class
 com\xiaolu\redis\JedisPoolTest.class
 com\xiaolu\redis\JedisTest.class
 com\xiaolu\domain\User.class
+com\xiaolu\service\impl\UserServiceImpl.class
+com\xiaolu\service\UserService.class

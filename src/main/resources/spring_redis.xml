@@ -1,0 +1,62 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:redisson="http://redisson.org/schema/redisson"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://redisson.org/schema/redisson
+       http://redisson.org/schema/redisson/redisson.xsd
+">
+
+    <!--<redisson:client id="myRedisson">
+        <redisson:single-server address="119.29.107.133:6380" password="kdbase"/>
+    </redisson:client>-->
+    <!--codec-provider-ref="myCodecProvider"
+    codec-ref="myCodec"
+    resolver-provider-ref="myResolverProvider"
+    executor-ref="myExecutor"
+    event-loop-group-ref="myEventLoopGroup"
+    load-balancer-ref="myLoadBalancer"-->
+
+    <redisson:client
+        id="myRedisson"
+        name="myRedisson"
+        threads="0"
+        netty-threads="0"
+        use-linux-native-epoll="false"
+        redisson-reference-enabled="true"
+    >
+        <!--这里的name属性和qualifier子元素不能同时使用。id和name的属性都可以被用来作为qualifier的备选值。-->
+        <!--<qualifier value="redisson3"/>-->
+        <redisson:sentinel-servers
+            idle-connection-timeout="10000"
+            ping-timeout="1000"
+            connect-timeout="10000"
+            timeout="3000"
+            retry-attempts="3"
+            retry-interval="1500"
+            reconnection-timeout="3000"
+            failed-attempts="3"
+            password="kdbase"
+            subscriptions-per-connection="5"
+            client-name="none"
+            subscription-connection-minimum-idle-size="1"
+            subscription-connection-pool-size="50"
+            slave-connection-minimum-idle-size="10"
+            slave-connection-pool-size="64"
+            master-connection-minimum-idle-size="10"
+            master-connection-pool-size="64"
+            read-mode="SLAVE"
+            subscription-mode="SLAVE"
+            master-name="mymaster"
+            database="0"
+        >
+            <redisson:sentinel-address value="119.29.107.133:26379" />
+            <redisson:sentinel-address value="119.29.107.133:26380" />
+            <redisson:sentinel-address value="119.29.107.133:26381" />
+        </redisson:sentinel-servers>
+    </redisson:client>
+</beans>

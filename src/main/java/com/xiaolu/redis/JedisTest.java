@@ -13,9 +13,9 @@ public class JedisTest {
         Jedis jedis = null;
 
         try{
-            jedis = new Jedis("119.29.107.133",6379);
+            jedis = new Jedis("119.29.107.133",6380);
             jedis.auth("kdbase");
-            jedis.set("hello","world");
+            jedis.set("hello","world777777777777");
             System.out.println(jedis.get("hello"));
         }catch (Exception e){
             e.printStackTrace();

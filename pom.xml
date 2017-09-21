@@ -95,12 +95,23 @@
       <version>1.0.27</version>
     </dependency>
 
+    <!--redis_spring集合-->
     <dependency>
-      <groupId>commons-dbcp</groupId>
-      <artifactId>commons-dbcp</artifactId>
-      <version>1.2.2</version>
+      <groupId>org.redisson</groupId>
+      <artifactId>redisson</artifactId>
+      <version>2.9.1</version>
     </dependency>
+    <!--<dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-redis</artifactId>
+      <version>1.8.0.RELEASE</version>
+    </dependency>-->
 
+    <dependency>
+      <groupId>redis.clients</groupId>
+      <artifactId>jedis</artifactId>
+      <version>2.6.2</version>
+    </dependency>
 
     <!--单元测试-->
     <dependency>
@@ -110,11 +121,6 @@
       <scope>test</scope>
     </dependency>
 
-    <dependency>
-      <groupId>redis.clients</groupId>
-      <artifactId>jedis</artifactId>
-      <version>2.9.0</version>
-    </dependency>
       <dependency>
           <groupId>junit</groupId>
           <artifactId>junit</artifactId>

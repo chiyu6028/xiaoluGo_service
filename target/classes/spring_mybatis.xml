@@ -41,24 +41,6 @@
         <property name="filters" value="mergeStat" />
     </bean >
 
-    <!--<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-          destroy-method="close">
-        <property name="driverClassName" value="${jdbc.driver}" />
-        <property name="url" value="${jdbc.url}" />
-        <property name="username" value="${jdbc.username}" />
-        <property name="password" value="${jdbc.password}" />
-        &lt;!&ndash; 初始化连接大小 &ndash;&gt;
-        <property name="initialSize" value="${jdbc.initialSize}"></property>
-        &lt;!&ndash; 连接池最大数量 &ndash;&gt;
-        <property name="maxActive" value="${jdbc.maxActive}"></property>
-        &lt;!&ndash; 连接池最大空闲 &ndash;&gt;
-        <property name="maxIdle" value="${jdbc.maxIdle}"></property>
-        &lt;!&ndash; 连接池最小空闲 &ndash;&gt;
-        <property name="minIdle" value="${jdbc.minIdle}"></property>
-        &lt;!&ndash; 获取连接最大等待时间 &ndash;&gt;
-        <property name="maxWait" value="${jdbc.maxWait}"></property>
-    </bean>-->
-
     <!-- 自动扫描mybatis映射文件 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"></property>
@@ -76,8 +58,6 @@
         <property name="basePackage" value="com.xiaolu.dao" />
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
     </bean>
-
-
 
 
 </beans>

@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import redis.clients.jedis.Jedis;
 
 /**
  * Created by chinaD on 2017/9/19.
@@ -29,4 +30,6 @@ public class UserTest {
         User user = userService.selectByPrimaryKey("1");
         System.out.println(user.getUser_name());
     }
+
+
 }
