@@ -14,15 +14,13 @@
     <!--<redisson:client id="myRedisson">
         <redisson:single-server address="119.29.107.133:6380" password="kdbase"/>
     </redisson:client>-->
-    <!--codec-provider-ref="myCodecProvider"
-    codec-ref="myCodec"
-    resolver-provider-ref="myResolverProvider"
-    executor-ref="myExecutor"
-    event-loop-group-ref="myEventLoopGroup"
-    load-balancer-ref="myLoadBalancer"-->
+
+    <bean id="redisUtil" class="com.xiaolu.util.RedisUtil" scope="singleton">
+        <property name="redissonClient" ref="redisson"></property>
+    </bean>
 
     <redisson:client
-        id="myRedisson"
+        id="redisson"
         name="myRedisson"
         threads="0"
         netty-threads="0"

@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.redisson.Redisson;
 import org.redisson.api.RBucket;
+import org.redisson.api.RedissonClient;
 import org.redisson.client.RedisClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -16,15 +17,15 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class RedisTest {
 
     @Autowired
-    Redisson redission;
+    RedissonClient redission;
 
     @Before
     public void before(){
-        //使用"spring.xml"和"spring-mybatis.xml"这两个配置文件创建Spring上下文
+        //使用spring_redis.xml这个配置文件创建Spring上下文
         ApplicationContext cx = new ClassPathXmlApplicationContext(new String[] {"spring_redis.xml"});
         //从Spring容器中根据bean的id取出我们要使用的userService对象
         cx.getApplicationName();
-        redission = (Redisson) cx.getBean("myRedisson");
+        redission = (RedissonClient) cx.getBean("redisson");
     }
 
     @Test

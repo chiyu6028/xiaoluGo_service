@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-            http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
-            http://www.springframework.org/schema/context
-            http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-     <!--配置数据源 使用的是Druid数据源 -->
+    <!--配置数据源 使用的是Druid数据源 -->
     <bean id = "dataSource" class = "com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method = "close" >
         <property name="url" value="${jdbc_url}" />
         <property name="username" value="${jdbc_username}" />
@@ -54,10 +58,46 @@
     <!-- 配置扫描器 -->
     <!-- DAO接口所在包名，Spring会自动查找其下的类-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <!-- 扫描com.xiaolu.dao这个包以及它的子包下的所有映射接口类 -->
-        <property name="basePackage" value="com.xiaolu.dao" />
+        <!-- 扫描com.xiaolu.dao这个包以及它的子包下的所有映射接口类,如果没有配置正确会引起报错 -->
+        <property name="basePackage" value="com.xiaolu.dao.**" />
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
     </bean>
+
+    <!-- ===================================事务的配置================================== -->
+
+     <aop:aspectj-autoproxy/>
+
+     <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
+     <bean id="transactionManager"
+           class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+           p:dataSource-ref="dataSource" />
+
+     <!-- 基于注释的事务，当注释中发现@Transactional时，使用id为“transactionManager”的事务管理器  -->
+     <!-- 如果没有设置transaction-manager的值，则spring以缺省默认的事务管理器来处理事务，默认事务管理器为第一个加载的事务管理器 -->
+     <!-- 优先级：如果配置冲突，注解的比xml的高 -->
+     <tx:annotation-driven transaction-manager="transactionManager"/>
+
+     <!-- 配置事务特性 ，配置add、delete和update开始的方法，事务传播特性为required -->
+     <tx:advice id="txAdvice" transaction-manager="transactionManager">
+         <tx:attributes>
+             <tx:method name="save*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception"/>
+             <tx:method name="insert*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception"/>
+             <tx:method name="add*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception"/>
+             <tx:method name="delete*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception"/>
+             <tx:method name="update*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception"/>
+             <tx:method name="modify*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception"/>
+             <tx:method name="edit*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception"/>
+             <tx:method name="login*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception"/>
+             <tx:method name="regist*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception"/>
+             <tx:method name="getAll*" propagation="REQUIRED" read-only="true" />
+         </tx:attributes>
+     </tx:advice>
+
+     <!-- 配置哪些类的方法进行事务管理 -->
+     <aop:config>
+         <aop:pointcut id="allManagerMethod" expression="execution (* com.xiaolu.service.*.*(..))" />
+         <aop:advisor advice-ref="txAdvice" pointcut-ref="allManagerMethod" />
+     </aop:config>
 
 
 </beans>
