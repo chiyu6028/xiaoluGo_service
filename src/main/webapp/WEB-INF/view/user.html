@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="../js/jquery.js"></script>
+    <script src="/js/jquery.js"></script>
 </head>
 <body>
 <div id="id">this is user div</div>
@@ -16,8 +16,8 @@
         $("#id").append("<div> cai lu</div>")
 
         $.ajax({
-            type: 'POST',
-            url: '/user/1',
+            type: 'GET',
+            url: '/go/user/1/info',
             dataType: "json",
             data:{
                 "a": 1,
