@@ -15,9 +15,9 @@
         <redisson:single-server address="119.29.107.133:6380" password="kdbase"/>
     </redisson:client>-->
 
-    <bean id="redisUtil" class="com.xiaolu.util.RedisUtil" scope="singleton">
+    <!--<bean id="redisUtil" class="com.xiaolu.util.RedisUtil" scope="singleton">
         <property name="redissonClient" ref="redisson"></property>
-    </bean>
+    </bean>-->
 
     <redisson:client
         id="redisson"

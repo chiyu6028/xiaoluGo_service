@@ -8,10 +8,20 @@ import org.redisson.api.*;
  */
 public class RedisUtil {
 
-    RedissonClient redissonClient;
+    private static RedisUtil redisUtil;
 
-    public void setRedissonClient(RedissonClient redissonClient) {
-        this.redissonClient = redissonClient;
+    private RedisUtil(){}
+
+    /**
+     * 提供单例模式
+     * @return
+     */
+    public static RedisUtil getInstance(){
+        if(redisUtil==null)
+            synchronized (RedisUtil.class) {
+                if(redisUtil==null) redisUtil=new RedisUtil();
+            }
+        return redisUtil;
     }
 
     /**

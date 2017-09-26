@@ -8,6 +8,7 @@ import redis.clients.jedis.JedisSentinelPool;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -29,10 +30,10 @@ public class JedisPoolTest {
         try {
             jedis = jedisSentinelPool.getResource();
             //jedis.set("hello","aaa");
-            jedis.rpush("listKey","a","b","c","d");
-            jedis.linsert("listKey", BinaryClient.LIST_POSITION.AFTER,"b","java");
-            System.out.println(jedis.lrange("listKey",0,-1));
-            jedis.del("listKey");
+            //jedis.rpush("listKey","a","b","c","d");
+            //jedis.linsert("listKey", BinaryClient.LIST_POSITION.AFTER,"b","java");
+            //System.out.println(jedis.lrange("listKey",0,-1));
+            //jedis.del("listKey");
         }catch (Exception e){
             e.printStackTrace();
         }finally {

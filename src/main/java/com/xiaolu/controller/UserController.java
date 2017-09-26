@@ -34,9 +34,10 @@ public class UserController {
      *方式二
      * 通过类的映射+方法的映射+请求方式
     */
-    @RequestMapping(path = "/user", method = RequestMethod.GET)
+    @RequestMapping(path = "/user")
     public String getUser() {
-        userService.selectByPrimaryKey("1");
+        User user = userService.selectByPrimaryKey("1");
+        System.out.println(user.getUser_name());
         System.out.println("2");
         return "user";
     }
