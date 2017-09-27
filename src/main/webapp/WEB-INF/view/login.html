@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/js/jquery.js"></script>
+</head>
+<body>
+<div id="id">登录页面</div>
+<form id="login">
+    <input type="text" id="userId" name="userId" size="20" /></br>
+    <input type="password" id="userPassword" name="userPassword" size="20" /></br>
+    <input type="text" id="validateCode" name="validCode" size="10" /> <img id="refreshImg" src="/validateCode" width="100" height="40"></br>
+    <input type="button" id="submit" value="提交" />
+</form>
+</body>
+
+<script>
+
+    $(document).ready(function () {
+
+        $("#submit").bind('click',function () {
+            var userId = $("#userId").val();
+            var userPassword = $("#userPassword").val();
+            var validateCode = $("#validateCode").val();
+            $.ajax({
+                type: 'GET',
+                url: '/loginSubmit',
+                dataType: "json",
+                data:{
+                    user_id: userId,
+                    user_password: userPassword,
+                    validCode: validateCode
+                },
+                success: function (data) {
+                    console.log(data);
+                    switch (data[0].flg){
+                        case 1 :
+                            window.location.href="/main";
+                            break;
+                        case 2 :
+                            $("#userId").after("<span>"+ data[0].msg+"</span>");
+                            break;
+                        case 3 :
+                            $("#userPassword").after("<span>"+ data[0].msg+"</span>");
+                            break;
+                        case 4 :
+                            $("#refreshImg").attr("src","/validateCode?id="+Math.random());
+                            $("#refreshImg").after("<span>"+ data[0].msg+"</span>");
+                            break;
+                    }
+                },
+                error:function (data) {
+                    console.log(data);
+                }
+            })
+        });
+
+        $("#refreshImg").bind('click',function () {
+            $(this).attr("src","/validateCode?id="+Math.random());
+        })
+
+    })
+
+</script>
+</html>

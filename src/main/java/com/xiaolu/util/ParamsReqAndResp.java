@@ -29,8 +29,8 @@ public class ParamsReqAndResp {
         return instance;
     }
 
-    public String getJSONString(HttpServletRequest request, Map result) {
-        List<Map<String, Object>> datas = new ArrayList(5);
+    public String getJSONString(Map result) {
+        List<Map<String, Object>> datas = new ArrayList();
         datas.add(result);
         String jsonResult = JSON.toJSONString(datas);
         return jsonResult;

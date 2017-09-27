@@ -72,7 +72,7 @@ public class UserController {
         User user = userService.selectByPrimaryKey(ID);
         Map<String,Object> userMap = new HashMap<String, Object>();
         userMap.put(ID,user);
-        String jsonResult = this.paramsReqAndResp.getJSONString(request, userMap);
+        String jsonResult = this.paramsReqAndResp.getJSONString(userMap);
         this.paramsReqAndResp.renderData(response, jsonResult);
 
     }

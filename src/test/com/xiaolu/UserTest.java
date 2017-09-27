@@ -25,11 +25,16 @@ public class UserTest {
     }
 
     @Test
-    public void testUser(){
+    public void testSelectByPrimaryKey(){
         //User user = new User();
         User user = userService.selectByPrimaryKey("1");
         System.out.println(user.getUser_name());
     }
 
-
+    @Test
+    public void testSelectUserBypassword(){
+        //User user = new User();
+        User user = userService.selectUserBypassword("1","123456");
+        System.out.println(user.getUser_name());
+    }
 }

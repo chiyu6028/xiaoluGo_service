@@ -9,4 +9,6 @@ public interface UserService {
 
 
     User selectByPrimaryKey(String userId);
+
+    User selectUserBypassword(String userId, String userPassword);
 }
