@@ -1,2 +1,2 @@
 # xiaoluGo_service
-spring+springMVC+mybatis+mysql+redis
+spring+springMVC+mybatis+mysql+redis+ajax
