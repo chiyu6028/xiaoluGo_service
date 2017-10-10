@@ -23,6 +23,10 @@ public class JedisTest {
 
     public static void main(String[] args) {
         Jedis jedis = null;
+        String a = "a";
+        String b = "a";
+
+        System.out.println(a==b);
 
         try{
             jedis = new Jedis("119.29.107.133",6380);

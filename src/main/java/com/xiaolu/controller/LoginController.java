@@ -85,6 +85,9 @@ public class LoginController {
             result.put("flg",1);
             String str = paramsReqAndResp.getJSONString(result);
             paramsReqAndResp.renderData(response,str);
+
+            //session添加登录标识。
+            session.setAttribute("login","successLogin");
             return "main";
         }
 

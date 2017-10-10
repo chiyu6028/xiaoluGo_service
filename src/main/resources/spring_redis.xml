@@ -15,6 +15,20 @@
         <redisson:single-server address="119.29.107.133:6380" password="kdbase"/>
     </redisson:client>-->
 
+    <!--springSession 配置 begin-->
+    <bean id="sessionConfiguration" class="org.redisson.spring.session.config.RedissonHttpSessionConfiguration">
+        <!--session的有效时间，单位秒,一般情况下是1800秒-->
+        <property name="maxInactiveIntervalInSeconds" value="1800"></property>
+    </bean>
+    <!-- 设置Cookie domain 和 名称 -->
+    <bean id="defaultCookieSerializer" class="org.springframework.session.web.http.DefaultCookieSerializer">
+        <property name="cookieName" value="XIAOLUSESSIONID"/>
+        <!--<property name="cookieMaxAge" value="2678400"/>-->
+        <!--property name="domainNamePattern" value="^.+?\\.(\\w+\\.[a-z]+)$"/-->
+    </bean>
+    <!--springSession 配置 end-->
+
+    <!--redis 哨兵模式连接 begin-->
     <redisson:client
         id="redisson"
         name="myRedisson"
@@ -53,4 +67,6 @@
             <redisson:sentinel-address value="119.29.107.133:26381" />
         </redisson:sentinel-servers>
     </redisson:client>
+    <!--redis 哨兵模式连接 end-->
+
 </beans>

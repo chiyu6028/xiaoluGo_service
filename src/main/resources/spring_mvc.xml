@@ -21,6 +21,22 @@
         <property name="suffix" value=".html"/>
     </bean>
 
+    <mvc:interceptors>
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
+        <mvc:interceptor>
+            <mvc:mapping path="/" />
+            <mvc:mapping path="/go/**"/>
+            <mvc:mapping path="/main/**"/>
+            <mvc:exclude-mapping path="/login"/>
+            <mvc:exclude-mapping path="/loginout"/>
+            <bean class="com.xiaolu.interceptor.ValidateInterceptor"/>
+        </mvc:interceptor>
+        <!--<mvc:interceptor>
+            <mvc:mapping path="/secure/*"/>
+            <bean class="org.example.SecurityInterceptor"/>
+        </mvc:interceptor>-->
+    </mvc:interceptors>
+
     <!--对进入DispatcherServlet的URL进行筛查，如果发现是静态资源的请求，
     就将该请求转由Web应用服务器默认的Servlet处理，如果不是静态资源的请求，
     才由DispatcherServlet继续处理-->
