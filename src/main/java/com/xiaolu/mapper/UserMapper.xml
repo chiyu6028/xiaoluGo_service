@@ -25,4 +25,12 @@
         where user_id = #{user_id,jdbcType=VARCHAR}
         and user_password = #{user_password,jdbcType=VARCHAR}
     </select>
+
+    <insert id="insertUser" parameterType="com.xiaolu.domain.User" >
+        insert into t_user (user_id, user_name, user_password
+        )
+        values (#{user_id,jdbcType=INTEGER}, #{user_name,jdbcType=CHAR}, #{user_password,jdbcType=CHAR}
+        )
+    </insert>
+
 </mapper>

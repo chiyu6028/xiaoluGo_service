@@ -2,6 +2,7 @@ package com.xiaolu.controller;
 
 import com.xiaolu.domain.User;
 import com.xiaolu.service.UserService;
+import com.xiaolu.util.MD5;
 import com.xiaolu.util.ParamsReqAndResp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import java.util.Map;
 
 /**
  * Created by chinaD on 2017/9/27.
+ * 登录和注册
  */
 @Controller
 public class LoginController {
@@ -36,7 +38,7 @@ public class LoginController {
     }
 
     @RequestMapping(path = "/loginSubmit", method = RequestMethod.GET)
-    public String login(HttpServletRequest request, HttpServletResponse response, HttpSession session){
+    public void login(HttpServletRequest request, HttpServletResponse response, HttpSession session){
 
         Map result = new HashMap();
         result.put("msg","登录成功");
@@ -46,10 +48,6 @@ public class LoginController {
 
         String sessionId = (String) session.getAttribute("sessionCode");
 
-        //判断是否第一次登录
-        if ("".equals(sessionId) || sessionId == null){
-            return "login";
-        }
 
         //用户名
         if ("".equals(user_id) || user_id == null){
@@ -57,7 +55,6 @@ public class LoginController {
             result.put("flg",2);
             String str = paramsReqAndResp.getJSONString(result);
             paramsReqAndResp.renderData(response,str);
-            return "login";
         }
 
         //密码
@@ -66,7 +63,6 @@ public class LoginController {
             result.put("flg",3);
             String str = paramsReqAndResp.getJSONString(result);
             paramsReqAndResp.renderData(response,str);
-            return "login";
         }
 
         //验证码校对
@@ -75,11 +71,10 @@ public class LoginController {
             result.put("flg",4);
             String str = paramsReqAndResp.getJSONString(result);
             paramsReqAndResp.renderData(response,str);
-            return "login";
         }
 
         //用户密码判断
-        User user = userService.selectUserBypassword(user_id, user_password);
+        User user = userService.selectUserBypassword(user_id, MD5.addMD5(user_password));
         if (user!=null){
             result.put("msg","登录成功");
             result.put("flg",1);
@@ -88,9 +83,7 @@ public class LoginController {
 
             //session添加登录标识。
             session.setAttribute("login","successLogin");
-            return "main";
         }
 
-        return "main";
     }
 }

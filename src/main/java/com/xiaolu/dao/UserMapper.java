@@ -11,4 +11,6 @@ public interface UserMapper {
     User selectByPrimaryKey(String user_id);
 
     User selectUserBypassword(@Param("user_id")String user_id, @Param("user_password")String user_password);
+
+    int insertUser(User user);
 }

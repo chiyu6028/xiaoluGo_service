@@ -37,4 +37,14 @@ public class UserTest {
         User user = userService.selectUserBypassword("1","123456");
         System.out.println(user.getUser_name());
     }
+
+    @Test
+    public void testInserUser(){
+        User user = new User();
+        user.setUser_id(2);
+        user.setUser_password("123456");
+        user.setUser_name("xiaocai");
+        int flag = userService.insertUser(user);
+
+    }
 }
