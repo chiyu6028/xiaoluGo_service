@@ -10,7 +10,7 @@ import java.util.Properties;
  */
 public class PropertiesUtil {
 
-    private PropertiesUtil() {
+    /*private PropertiesUtil() {
     }
 
     private static volatile PropertiesUtil instance = null;
@@ -24,9 +24,20 @@ public class PropertiesUtil {
             }
         }
         return instance;
+    }*/
+
+    //创建 SingleObject 的一个对象
+    private static PropertiesUtil instance = new PropertiesUtil();
+
+    //让构造函数为 private，这样该类就不会被实例化
+    private PropertiesUtil(){}
+
+    //获取唯一可用的对象
+    public static PropertiesUtil getInstance(){
+        return instance;
     }
 
-    static String getProperties(String key) {
+    public static String getProperties(String key) {
         InputStream proStr = PropertiesUtil.class.getResourceAsStream("/conf.properties");
         Properties pro = new Properties();
         String str = null;
@@ -45,6 +56,10 @@ public class PropertiesUtil {
             }
         }
         return str;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(PropertiesUtil.getProperties("download_path"));
     }
 
 }

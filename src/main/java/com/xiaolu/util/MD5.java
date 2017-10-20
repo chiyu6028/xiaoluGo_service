@@ -3,6 +3,7 @@ package com.xiaolu.util;
 import java.security.MessageDigest;
 
 /**
+ * 为后台数据加密
  * Created by chinaD on 2017/10/11.
  */
 public class MD5 {

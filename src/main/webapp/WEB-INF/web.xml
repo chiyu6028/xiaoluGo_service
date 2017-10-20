@@ -1,6 +1,6 @@
 <!DOCTYPE web-app PUBLIC
  "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+ "http://java.sun.com/dtd/web-app_2_3.dtd">
 
 <web-app>
   <display-name>xiaoluGO_server</display-name>
@@ -11,14 +11,11 @@
     <param-value>classpath:spring.xml,classpath:spring_mvc.xml,classpath:spring_mybatis.xml,classpath:spring_redis.xml</param-value>
   </context-param>
 
+ <!--spring session管理-->
   <filter>
     <filter-name>springSessionRepositoryFilter</filter-name>
     <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
   </filter>
-  <filter-mapping>
-    <filter-name>springSessionRepositoryFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
 
   <!-- 编码过滤器 -->
   <filter>
@@ -33,6 +30,12 @@
       <param-value>true</param-value>
     </init-param>
   </filter>
+
+  <filter-mapping>
+    <filter-name>springSessionRepositoryFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
   <filter-mapping>
     <filter-name>encodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
@@ -65,11 +68,6 @@
     <servlet-name>SpringMVC</servlet-name>
     <url-pattern>/index</url-pattern>
   </servlet-mapping>
-
-  <!--会话超时-->
-  <session-config>
-    <session-timeout>30</session-timeout>
-  </session-config>
 
   <!--默认界面-->
   <welcome-file-list>

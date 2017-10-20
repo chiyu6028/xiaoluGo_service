@@ -3,10 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="/js/jquery.js"></script>
 </head>
 <body>
 
 这是主页
 
+<a href="/download?fileName=a.mp3">下载</a> <br/>
+
+<form id="uploadForm" enctype="multipart/form-data">
+    请选择上传文件：<input type="file" name="fileupload"/><br/>
+    <input type="button" id="upload" value="上传"/>
+</form>
+
 </body>
+
+<script>
+
+    $(document).ready(function () {
+        $("#upload").on('click', function () {
+            var formdata = new FormData($("#uploadForm")[0]);
+            //console.log(formdata.g)
+            /*$.ajax({
+             type: 'POST',
+             url: '/upload',
+             data:formdata,
+             async: false,
+             cache: false,
+             contentType: false,
+             processData: false,
+             success: function (data) {
+             console.log(data);
+             },
+             error:function (data) {
+             console.log(data);
+             }
+             })*/
+            var xmlhttp;
+            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            } else {// code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.open('POST', '/upload', true);//请求方式，请求路径，是否异步
+            xmlhttp.onload = function (result) {
+                var data = JSON.parse(result.target.response) ;
+                alert(data[0].msg);
+            }
+            xmlhttp.send(formdata);
+        })
+
+    })
+
+</script>
 </html>

@@ -4,6 +4,7 @@ import org.redisson.Redisson;
 import org.redisson.api.*;
 
 /**
+ * redis使用工具类
  * Created by chinaD on 2017/9/21.
  */
 public class RedisUtil {

@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * 数据传递和json转换
  * Created by chinaD on 2017/9/26.
  */
 public class ParamsReqAndResp {
