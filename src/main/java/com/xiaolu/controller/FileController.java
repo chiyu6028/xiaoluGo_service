@@ -153,7 +153,7 @@ public class FileController {
                                 int len = 0;
                                 //11.定义文件进度
                                 double rate = 0;
-                                while ((len = in.read(buffer)) > 0){
+                                while (-1 != (len = in.read(buffer))){
                                     //12.计算文件进度
                                     //rate += len/(double)upLoadFileSize*1000;
                                     fileOut.write(buffer,0,len);
