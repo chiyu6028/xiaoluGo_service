@@ -17,6 +17,10 @@
 </form>
 
 <div id="uplosdInfo"></div>
+<div>
+    <progress id="progressBar" value="0" max="100" style="width: 300px;"></progress>
+    <span id="percentage"></span><span id="time"></span>
+</div>
 
 </body>
 
@@ -24,56 +28,109 @@
 
     $(document).ready(function () {
         $("#upload").on('click', function () {
-            var formdata = new FormData($("#uploadForm")[0]);
-            //console.log(formdata.g)
-            /*$.ajax({
-             type: 'POST',
-             url: '/upload',
-             data:formdata,
-             async: false,
-             cache: false,
-             contentType: false,
-             processData: false,
-             success: function (data) {
-             console.log(data);
-             },
-             error:function (data) {
-             console.log(data);
-             }
-             })*/
-            var xmlhttp;
-            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlhttp = new XMLHttpRequest();
-            } else {// code for IE6, IE5
-                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            xmlhttp.open('POST', '/upload', true);//请求方式，请求路径，是否异步
-            xmlhttp.onload = function (result) {
-                var data = JSON.parse(result.target.response) ;
-                alert(data[0].msg);
-            }
-            xmlhttp.send(formdata);
 
+            //方式一使用jquery的方式
+            /*var formdata = new FormData($("#uploadForm")[0]);
+            $.ajax({
+                type: 'POST',
+                url: '/upload',
+                data: formdata,
+                async: true,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            })
 
-            var eventFun = function(){
+            var eventFun = function () {
                 $.ajax({
                     type: 'POST',
                     url: '/process',
                     data: {},
                     dataType: 'json',
-                    success : function(data){
-                        $("#uplosdInfo").empty().html("上传进度:"+data.show+",上传百分比："+data.rate+"%");
-                        /*$( "#proBar" ).progressbar({
-                            value: data.rate
-                        });*/
-                        if(data.rate == 100){
+                    success: function (data) {
+                        $("#uplosdInfo").empty().html("上传进度:" + data.show + ",上传百分比：" + data.rate + "%");
+                        /!*$( "#proBar" ).progressbar({
+                         value: data.rate
+                         });*!/
+                        if (data.rate == 100) {
                             window.clearInterval(intId);
                             alert("上传完成");
                         }
                     }
                 });
             };
-            var intId = window.setInterval(eventFun,100);
+            var intId = window.setInterval(eventFun, 100);*/
+
+
+            //方式二，原生
+            var formdata = new FormData($("#uploadForm")[0]);
+            var xmlhttp;
+            var ot , oloaded;
+            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            } else {// code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.open('POST', '/upload', true);//请求方式，请求路径，是否异步
+            //请求成功
+            xmlhttp.onload = function (result) {
+                var data = JSON.parse(result.target.response);
+                document.getElementById("time").innerHTML="";
+                alert(data[0].msg);
+            }
+            //请求失败
+            xmlhttp.onerror = function(){
+                alert("文件上传失败！");
+            }
+            //请求开始
+            xmlhttp.upload.onloadstart = function(){
+                ot = new Date().getTime();
+                oloaded = 0;
+            }
+            xmlhttp.upload.onprogress = function (evt) {
+                var progressBar = document.getElementById("progressBar");
+                var percentageDiv = document.getElementById("percentage");
+                // event.total是需要传输的总字节，event.loaded是已经传输的字节。如果event.lengthComputable不为真，则event.total等于0
+                if (evt.lengthComputable) {//
+                    progressBar.max = evt.total;
+                    progressBar.value = evt.loaded;
+                    percentageDiv.innerHTML = Math.round(evt.loaded / evt.total * 100) + "%";
+                }
+
+                var time = document.getElementById("time");
+                var nt = new Date().getTime();//获取当前时间
+                var pertime = (nt-ot)/1000; //计算出上次调用该方法时到现在的时间差，单位为s
+                ot = new Date().getTime(); //重新赋值时间，用于下次计算
+
+                var perload = evt.loaded - oloaded; //计算该分段上传的文件大小，单位b
+                oloaded = evt.loaded;//重新赋值已上传文件大小，用以下次计算
+
+                //上传速度计算
+                var speed = perload/pertime;//单位b/s
+                var bspeed = speed;
+                var units = 'b/s';//单位名称
+                if(speed/1024>1){
+                    speed = speed/1024;
+                    units = 'k/s';
+                }
+                if(speed/1024>1){
+                    speed = speed/1024;
+                    units = 'M/s';
+                }
+                speed = speed.toFixed(1);
+                //剩余时间
+                var resttime = ((evt.total-evt.loaded)/bspeed).toFixed(1);
+                time.innerHTML = '，速度：'+speed+units+'，剩余时间：'+resttime+'s';
+                if(bspeed==0)
+                    time.innerHTML = '上传已取消';
+            }
+            xmlhttp.send(formdata);
         })
 
     })
