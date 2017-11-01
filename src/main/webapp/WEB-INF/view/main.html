@@ -16,6 +16,8 @@
     <input type="button" id="upload" value="上传"/>
 </form>
 
+<div id="uplosdInfo"></div>
+
 </body>
 
 <script>
@@ -51,6 +53,27 @@
                 alert(data[0].msg);
             }
             xmlhttp.send(formdata);
+
+
+            var eventFun = function(){
+                $.ajax({
+                    type: 'POST',
+                    url: '/process',
+                    data: {},
+                    dataType: 'json',
+                    success : function(data){
+                        $("#uplosdInfo").empty().html("上传进度:"+data.show+",上传百分比："+data.rate+"%");
+                        /*$( "#proBar" ).progressbar({
+                            value: data.rate
+                        });*/
+                        if(data.rate == 100){
+                            window.clearInterval(intId);
+                            alert("上传完成");
+                        }
+                    }
+                });
+            };
+            var intId = window.setInterval(eventFun,100);
         })
 
     })
