@@ -49,6 +49,9 @@
                             $("#refreshImg").attr("src","/validateCode?id="+Math.random());
                             $("#refreshImg").after("<span>"+ data[0].msg+"</span>");
                             break;
+                        case 5 :
+                            $("#id").after("<span>"+ data[0].msg+"</span>");
+                            break;
                     }
                 },
                 error:function (data) {

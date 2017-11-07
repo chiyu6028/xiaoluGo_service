@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiaolu.dao.LoginLogMapper">
+
+    <sql id="LoginLog_Column_List">
+        user_id, login_ip, login_date,login_msg
+    </sql>
+
+    <insert id="insertLoginLog" parameterType="java.util.HashMap" >
+        insert into t_login_log
+        (
+            <include refid="LoginLog_Column_List" />
+        )
+        values
+        (
+            #{user_id,jdbcType=VARCHAR}, #{login_ip,jdbcType=VARCHAR}, now(),#{login_msg,jdbcType=VARCHAR}
+        )
+    </insert>
+
+
+
+</mapper>
