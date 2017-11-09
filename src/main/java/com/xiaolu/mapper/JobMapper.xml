@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiaolu.dao.JobMapper">
+
+    <sql id="Job_Column_List">
+        springId,	beanClass,	methodName,	params,	cronExpression,	jobStatus,
+        jobName,	jobGroup,	isConcurrent,	updateTime,	createTime,	description
+    </sql>
+
+    <select id="selectJobById" resultMap="java.util.List" parameterType="java.lang.Integer">
+        select
+        jobId, <include refid="Job_Column_List" />
+        from t_job
+        where user_id = #{user_id,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insertLoginLog" parameterType="com.xiaolu.domain.ScheduleJob" >
+        insert into t_job
+        (
+            <include refid="Job_Column_List" />
+        )
+        values
+        (
+            #{springId,jdbcType=VARCHAR},
+            #{beanClass,jdbcType=VARCHAR},
+            #{methodName,jdbcType=VARCHAR},
+            #{params,jdbcType=VARCHAR},
+            #{cronExpression,jdbcType=VARCHAR},
+            #{jobStatus,jdbcType=VARCHAR},
+            #{jobName,jdbcType=VARCHAR},
+            #{jobGroup,jdbcType=VARCHAR},
+            #{isConcurrent,jdbcType=VARCHAR},
+            now(),
+            now(),
+            #{description,jdbcType=VARCHAR}
+        )
+    </insert>
+
+
+
+</mapper>
