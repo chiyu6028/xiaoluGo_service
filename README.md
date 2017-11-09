@@ -1,7 +1,8 @@
 # xiaoluGo_service
 spring+springMVC+mybatis+mysql+redis+ajax
 
-实现功能
+实现功能:
+
 1.spring session + redis 实现session共享;
 
 2.redis 数据存储调用;
