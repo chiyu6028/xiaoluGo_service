@@ -7,7 +7,7 @@
         jobName,	jobGroup,	isConcurrent,	updateTime,	createTime,	description
     </sql>
 
-    <select id="selectJobById" resultMap="java.util.List" parameterType="java.lang.Integer">
+    <select id="selectJobById" resultType="java.util.List" parameterType="java.lang.Integer">
         select
         jobId, <include refid="Job_Column_List" />
         from t_job
