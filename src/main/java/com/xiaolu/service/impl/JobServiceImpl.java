@@ -6,7 +6,7 @@ import com.xiaolu.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Map;
 
 /**
  * Created by chinaD on 2017/11/9.
@@ -18,8 +18,8 @@ public class JobServiceImpl implements JobService {
     JobMapper jobMapper;
 
     @Override
-    public List selectJobList(int jobId) {
-        return jobMapper.selectJobList(jobId);
+    public Map selectJobListById(Integer jobId) {
+        return jobMapper.selectJobListById(jobId);
     }
 
     @Override

@@ -11,7 +11,7 @@ public class ScheduleJob {
     public static final String STATUS_NOT_RUNNING = "0";
     public static final String CONCURRENT_IS = "1";
     public static final String CONCURRENT_NOT = "0";
-    private Long jobId;
+    private int jobId;
 
     private Date createTime;
 
@@ -57,11 +57,11 @@ public class ScheduleJob {
      */
     private String params;
 
-    public Long getJobId() {
+    public Integer getJobId() {
         return jobId;
     }
 
-    public void setJobId(Long jobId) {
+    public void setJobId(Integer jobId) {
         this.jobId = jobId;
     }
 

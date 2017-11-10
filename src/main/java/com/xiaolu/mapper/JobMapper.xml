@@ -7,14 +7,14 @@
         jobName,	jobGroup,	isConcurrent,	updateTime,	createTime,	description
     </sql>
 
-    <select id="selectJobById" resultType="java.util.List" parameterType="java.lang.Integer">
+    <select id="selectJobListById" resultType="java.util.Map" parameterType="java.lang.Integer">
         select
         jobId, <include refid="Job_Column_List" />
         from t_job
-        where user_id = #{user_id,jdbcType=INTEGER}
+        where jobId = ${jobId}
     </select>
 
-    <insert id="insertLoginLog" parameterType="com.xiaolu.domain.ScheduleJob" >
+    <insert id="insertJob" parameterType="com.xiaolu.domain.ScheduleJob" >
         insert into t_job
         (
             <include refid="Job_Column_List" />
