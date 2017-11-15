@@ -9,9 +9,9 @@ spring+springMVC+mybatis+mysql+redis+ajax
 
 3.springmvc 实现验证码;
 
-4.springmvc 登录+登录日志;
+4.springmvc 登录日志;
 
 5.文件上传及上传进度条，文件下载;
 
-6.quartz 调用+ spring整合;
+6.quartz 调用 + spring整合 + 自定义任务;
 
