@@ -6,8 +6,11 @@
     <script src="/js/jquery.js"></script>
 </head>
 <body>
-
+    JOB
     <div id="jobById"></div>
+    <table id="jobList" style="border: solid 1px black">
+
+    </table>
 
 
 </body>
@@ -18,17 +21,113 @@
 
         $.ajax({
             type: 'GET',
-            url: '/job/1',
+            url: '/job/all',
             dataType: "json",
             data:{},
             success: function (data) {
-                console.log(data);
+                var html = "<tr><th>编号</th><th>名称</th><th>表达式</th><th>class</th><th>Bean</th><th>mothod</th><th>状态</th><th>描述</th><th>操作</th></tr>";
+                if(data.length > 0){
+                    for (var i = 0 ; i < data[0].list.length; i++){
+                        html += "<tr>";
+                        html += "<td>"+ data[0].list[i].jobId+"</td>";
+                        html += "<td>"+ data[0].list[i].jobName+"</td>";
+                        html += "<td>"+ data[0].list[i].cronExpression+"</td>";
+                        html += "<td>"+ data[0].list[i].beanClass+"</td>";
+                        html += "<td>"+ data[0].list[i].springId+"</td>";
+                        html += "<td>"+ data[0].list[i].methodName+"</td>";
+                        html += "<td>"+ data[0].list[i].jobStatus+"</td>";
+                        html += "<td>"+ data[0].list[i].description+"</td>";
+                        html += "<td ><button onclick='exec(this)'>立即执行</button>" +
+                                "<button onclick='pause(this)'>暂停</button>" +
+                                "<button onclick='resume(this)'>恢复</button>" +
+                                "<button onclick='deleteSchedule(this)'>删除</button></td>";
+                        html += "</tr>";
+                    }
+                    $("#jobList").empty().append(html);
+                }
             },
             error:function (data) {
                 console.log(data);
             }
         })
+
+        exec = function (that) {
+            var jobId = $(that).closest("tr").find("td").first().html();
+            $.ajax({
+                type: 'GET',
+                url: '/job/execJob',
+                dataType: "json",
+                data:{
+                    jobId: jobId
+                },
+                success: function (data) {
+                    console.log(data);
+                },
+                error:function (data) {
+                    console.log(data);
+                }
+            })
+        }
+
+        pause = function (that) {
+            var jobId = $(that).closest("tr").find("td").first().html();
+            $.ajax({
+                type: 'GET',
+                url: '/job/pauseJob',
+                dataType: "json",
+                data:{
+                    jobId: jobId
+                },
+                success: function (data) {
+                    console.log(data);
+                },
+                error:function (data) {
+                    console.log(data);
+                }
+            })
+        }
+
+        resume = function (that) {
+            var jobId = $(that).closest("tr").find("td").first().html();
+            $.ajax({
+                type: 'GET',
+                url: '/job/resumeJob',
+                dataType: "json",
+                data:{
+                    jobId: jobId
+                },
+                success: function (data) {
+                    console.log(data);
+                },
+                error:function (data) {
+                    console.log(data);
+                }
+            })
+        }
+
+        deleteSchedule = function (that) {
+            var jobId = $(that).closest("tr").find("td").first().html();
+            $.ajax({
+                type: 'GET',
+                url: '/job/deleteScheduleJob',
+                dataType: "json",
+                data:{
+                    jobId: jobId
+                },
+                success: function (data) {
+                    console.log(data);
+                },
+                error:function (data) {
+                    console.log(data);
+                }
+            })
+        }
     })
 
 </script>
+<style>
+    td, th{
+        border: solid 1px black;
+    }
+</style>
 </html>

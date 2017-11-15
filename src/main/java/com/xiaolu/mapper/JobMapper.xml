@@ -14,6 +14,12 @@
         where jobId = ${jobId}
     </select>
 
+    <select id="selectJobAll" resultType="java.util.Map">
+        select
+        jobId, <include refid="Job_Column_List" />
+        from t_job
+    </select>
+
     <insert id="insertJob" parameterType="com.xiaolu.domain.ScheduleJob" >
         insert into t_job
         (

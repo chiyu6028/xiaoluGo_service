@@ -44,4 +44,8 @@
         <property name="autoStartup" value="true"/>
     </bean>
 
+    <bean id="jobTask" class="com.xiaolu.quartz.task.JobTask"/>
+
+    <bean id="application" class="com.xiaolu.util.SpringContextTool"/>
+
 </beans>
