@@ -100,6 +100,10 @@ public class LoginController {
             //记录日志
             loginLog(request,user_id ,msg);
 
+            //反回登录人info
+            User userinfo = userService.selectByPrimaryKey(user_id);
+            result.put("user",userinfo);
+
             String str = paramsReqAndResp.getJSONString(result);
             paramsReqAndResp.renderData(response,str);
 

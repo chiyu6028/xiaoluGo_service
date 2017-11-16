@@ -27,6 +27,7 @@
             <mvc:mapping path="/" />
             <mvc:mapping path="/go/**"/>
             <mvc:mapping path="/main/**"/>
+            <mvc:mapping path="/chat/**"/>
             <mvc:exclude-mapping path="/login"/>
             <mvc:exclude-mapping path="/loginout"/>
             <bean class="com.xiaolu.interceptor.ValidateInterceptor"/>
