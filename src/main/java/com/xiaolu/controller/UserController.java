@@ -37,7 +37,6 @@ public class UserController {
     @RequestMapping(method = RequestMethod.GET)
     public String get() {
         userService.selectByPrimaryKey("1");
-        System.out.println("1");
         return "user";
     }
 
@@ -48,8 +47,6 @@ public class UserController {
     @RequestMapping(path = "/user",method = RequestMethod.GET)
     public String getUser() {
         User user = userService.selectByPrimaryKey("1");
-        System.out.println(user.getUser_name());
-        System.out.println("2");
         return "user";
     }
 

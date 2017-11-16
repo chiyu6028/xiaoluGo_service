@@ -48,4 +48,6 @@
 
     <bean id="application" class="com.xiaolu.util.SpringContextTool"/>
 
+    <bean id="chatWebSocketHandler" class="com.xiaolu.websocket.ChatWebSocketHandler" scope="prototype"/>
+
 </beans>
