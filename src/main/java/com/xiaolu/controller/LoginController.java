@@ -109,6 +109,7 @@ public class LoginController {
 
             //session添加登录标识。
             session.setAttribute("login","successLogin");
+            session.setAttribute("user",userinfo);
         }else{
             msg = "用户名或密码不正确";
             result.put("msg",msg);

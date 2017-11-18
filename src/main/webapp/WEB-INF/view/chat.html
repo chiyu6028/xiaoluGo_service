@@ -22,7 +22,8 @@
         var websocket;
         if ('WebSocket' in window){
             console.log("此浏览器支持websocket");
-            websocket = new WebSocket("ws://127.0.0.1:8080/chat/1")
+            var user = JSON.parse(sessionStorage.getItem("user"));
+            websocket = new WebSocket("ws://127.0.0.1:8080/chat/"+user.user_id)
         }else{
             alert("浏览器不支持");
         }
@@ -39,7 +40,6 @@
 
         //3.接收消息
         websocket.onmessage = function (event) {
-            console.log(event)
             $("#message").append(event.data+"</br>")
         }
 

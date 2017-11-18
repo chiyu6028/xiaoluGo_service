@@ -12,6 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class ChatController {
 
+    @RequestMapping(path = "/chat", method = RequestMethod.GET)
+    public String chat(){
+        return "chat";
+    }
+
     @RequestMapping(path = "/chat/{user_id}", method = RequestMethod.GET)
     public String toChat(@PathVariable String user_id, HttpServletRequest request, HttpServletResponse response){
         String message = request.getParameter("message");
