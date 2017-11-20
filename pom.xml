@@ -230,8 +230,9 @@
   <build>
     <finalName>xiaoluGO</finalName>
 
-    <!--源码打包-->
+
     <plugins>
+      <!--源码打包-->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
@@ -244,6 +245,15 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+      <!--编译版本-->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
       </plugin>
     </plugins>
 
