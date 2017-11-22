@@ -41,7 +41,7 @@ public class ValidateInterceptor extends HandlerInterceptorAdapter {
         log.info("contextPath:"+contextPath);
         log.info("url:"+url);
 
-        String login =  (String)request.getSession().getAttribute("login");
+        String login =  (String)request.getSession(true).getAttribute("login");
         if( null == login || !login.equals("successLogin")){
             log.info("Interceptor：跳转到login页面！");
             //request.getRequestDispatcher("/WEB-INF/view/login.html").forward(request, response);
