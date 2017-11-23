@@ -15,3 +15,4 @@ spring+springMVC+mybatis+mysql+redis+ajax
 
 6.quartz 调用 + spring整合 + 自定义任务;
 
+7.activeMQ + spring 整合
