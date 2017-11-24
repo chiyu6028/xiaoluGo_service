@@ -42,6 +42,7 @@
     <jms:listener-container concurrency="10" >
         <jms:listener id="One" destination="Queue.One" ref="queueListener" concurrency="4-8" />
         <jms:listener id="two" destination="Queue.Two" ref="queueListener" />
+        <jms:listener id="three" destination="Queue.Three" ref="queueListener" />
     </jms:listener-container>
 
 </beans>

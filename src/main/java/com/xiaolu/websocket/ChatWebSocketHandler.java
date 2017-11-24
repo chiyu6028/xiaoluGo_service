@@ -94,9 +94,16 @@ public class ChatWebSocketHandler {
         error.printStackTrace();
     }
 
-    public Boolean sendMassage() {
-        System.out.println(this.user_id);
+    public Boolean sendMassage(String message) {
+        try {
 
+            for (String key : userMap.keySet()){
+                ChatWebSocketHandler chat = userMap.get(key);
+                chat.userSession.getBasicRemote().sendText("activeMQ的消息是：" + message);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return true;
     }
 

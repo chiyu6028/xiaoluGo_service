@@ -5,5 +5,5 @@ package com.xiaolu.service;
  */
 public interface WebsocketService {
 
-    public Boolean sendMassage();
+    public Boolean sendMassage(String msg);
 }
