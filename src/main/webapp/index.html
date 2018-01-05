@@ -8,6 +8,7 @@
 <body>
 <div id="id">默认页面</div>
 </body>
+    当前登录人数：<span id="count"></span><br>
     目录：<br>
     <a href="/go">跳转到go</a></br>
     <a href="/main">首页：文件上传下载</a></br>
@@ -21,4 +22,25 @@
 
 </h2>
 </body>
+<script>
+
+    $(document).ready(function () {
+
+        $.ajax({
+            type: 'GET',
+            url: '/count',
+            success: function (data) {
+                console.log(data);
+                var obj = JSON.parse(data);
+                $("#count").empty().append(obj[0].count);
+
+            },
+            error:function (data) {
+                console.log(data);
+            }
+        })
+
+    })
+
+</script>
 </html>

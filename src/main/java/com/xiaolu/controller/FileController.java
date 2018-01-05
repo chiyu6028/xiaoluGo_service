@@ -242,4 +242,12 @@ public class FileController {
             e.printStackTrace();
         }
     }
+
+    /**/
+    @RequestMapping(path = "/pdf",method = RequestMethod.GET)
+    public void officeToPDF(HttpServletResponse response, HttpServletRequest request){
+        //文件上传路径
+        String path = PropertiesUtil.getInstance().getProperties("upload_path");
+
+    }
 }

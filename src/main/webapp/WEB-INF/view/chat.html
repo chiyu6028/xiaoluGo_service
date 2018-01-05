@@ -23,7 +23,7 @@
         if ('WebSocket' in window){
             console.log("此浏览器支持websocket");
             var user = JSON.parse(sessionStorage.getItem("user"));
-            websocket = new WebSocket("ws://127.0.0.1:8080/chat/"+user.user_id)
+            websocket = new WebSocket("ws://127.0.0.1:8080/chatMe?user_id="+user.user_id);
         }else{
             alert("浏览器不支持");
         }

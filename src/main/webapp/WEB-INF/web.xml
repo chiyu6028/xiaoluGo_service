@@ -36,7 +36,7 @@
     <filter-class>com.xiaolu.filter.LoginFilter</filter-class>
     <init-param>
       <param-name>ignores</param-name>
-      <param-value>/login,/loginSubmit,/js,/css,/validateCode</param-value>
+      <param-value>/login,/loginSubmit,/js,/css,/validateCode,/count</param-value>
     </init-param>
   </filter>
 
@@ -62,6 +62,10 @@
   <!-- 防止Spring内存溢出监听器 -->
   <listener>
     <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+  </listener>
+  <!--自定义监听器-->
+  <listener>
+    <listener-class>com.xiaolu.listener.CountSessionListener</listener-class>
   </listener>
 
   <!-- Spring MVC servlet -->

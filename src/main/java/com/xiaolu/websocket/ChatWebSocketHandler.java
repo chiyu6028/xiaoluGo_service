@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.*;
 
 /**
+ * 基于javax.websokct 方式一
  * Created by chinaD on 2017/11/15.
  */
 @ServerEndpoint(value = "/chat/{user_id}", configurator = SpringConfigurator.class)

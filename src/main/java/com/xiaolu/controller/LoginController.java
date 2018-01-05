@@ -142,4 +142,13 @@ public class LoginController {
         int i = loginLogService.insertLoginLog(loginMap);
         return i;
     }
+
+    @RequestMapping(path = "/count", method = RequestMethod.GET)
+    public void getCount(HttpServletRequest request, HttpServletResponse response, HttpSession session){
+        String count = String.valueOf(session.getAttribute("count"));
+        Map countMap = new HashMap();
+        countMap.put("count",count);
+        String result = paramsReqAndResp.getJSONString(countMap);
+        paramsReqAndResp.renderData(response,result);
+    }
 }

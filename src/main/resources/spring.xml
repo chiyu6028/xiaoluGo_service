@@ -50,4 +50,13 @@
 
     <bean id="chatWebSocketHandler" class="com.xiaolu.websocket.ChatWebSocketHandler" scope="prototype"/>
 
+    <!--springSession sessionListener的监听方式-->
+    <!--<bean class="org.springframework.session.web.http.SessionEventHttpSessionListenerAdapter">
+        <constructor-arg name="listeners">
+            <list>
+                <bean class="com.xiaolu.listener.CountSessionListener"></bean>
+            </list>
+        </constructor-arg>
+    </bean>-->
+
 </beans>
