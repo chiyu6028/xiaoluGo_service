@@ -58,4 +58,12 @@
         <property name="maxInMemorySize" value="40960" />
     </bean>-->
 
+    <!-- servlet适配器，这里必须明确声明，因为spring默认没有初始化该适配器 -->
+    <bean id="servletHandlerAdapter" class="org.springframework.web.servlet.handler.SimpleServletHandlerAdapter"></bean>
+
+    <!--http://127.0.0.1:8080/kjdp_ajax，当没有对应的controller RequestMapping 就走servlet-->
+    <bean name="/**/kjdp_ajax" class="com.xiaolu.controller.AjaxController"
+          scope="request">
+    </bean>
+
 </beans>

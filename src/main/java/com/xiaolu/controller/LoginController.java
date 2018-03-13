@@ -41,6 +41,13 @@ public class LoginController {
         return "main";
     }
 
+    //测试，http://127.0.0.1:8080/kjdp_ajax，
+    /*@RequestMapping(path = "/kjdp_ajax")
+    public String test(){
+        System.out.println("kjdp_ajax");
+        return null;
+    }*/
+
     @RequestMapping(path = "/loginSubmit", method = RequestMethod.GET)
     public void login(HttpServletRequest request, HttpServletResponse response, HttpSession session){
 
